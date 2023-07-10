@@ -16,9 +16,8 @@
       </q-toolbar>
 
       <q-tabs align="left">
-        <q-route-tab to="/guest/page1" label="Page One" />
-        <q-route-tab to="/guest/page2" label="Page Two" />
-        <q-route-tab to="/guest/page3" label="Page Three" />
+        <q-route-tab to="/guest/" label="Login Page" />
+        <q-route-tab to="/guest/register" label="Registration Page" />
       </q-tabs>
     </q-header>
 
