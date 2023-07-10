@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <h1>Consulatations Page</h1>
+    <h1>Consultations Page</h1>
   </q-page>
 </template>
 

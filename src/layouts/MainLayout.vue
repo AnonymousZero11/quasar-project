@@ -1,3 +1,22 @@
+<script setup>
+import routes from 'src/router/routes.js'
+import { computed } from 'vue'
+
+const tabs = computed(() => {
+  const layout = routes.filter((item) => {
+    return item.path === '/auth'
+  });
+
+  const children = layout.map((item) => {
+    return item.children;
+  });
+
+  return children[0];
+})
+
+</script>
+
+
 <template>
   <q-layout view="hHh lpR fFf">
 
@@ -16,9 +35,12 @@
       </q-toolbar>
 
       <q-tabs align="left">
-        <q-route-tab to="/guest/page1" label="Page One" />
-        <q-route-tab to="/guest/page2" label="Page Two" />
-        <q-route-tab to="/guest/page3" label="Page Three" />
+        <q-route-tab
+          v-for="tab in tabs"
+          :key="tab.path"
+          :to="'/auth/' + tab.path"
+          :label="tab.name"
+        />
       </q-tabs>
     </q-header>
 
@@ -50,6 +72,7 @@
 
 <script>
 import { ref } from 'vue'
+import { route } from 'quasar/wrappers'
 
 export default {
   setup () {
