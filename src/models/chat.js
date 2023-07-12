@@ -1,3 +1,6 @@
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "src/boot/firebaseConnection";
+
 const allChats = () => {
   return JSON.parse(localStorage.getItem("chats") || "[]");
 };
@@ -16,23 +19,32 @@ export const getChats = (user_id) => {
   });
 };
 
-export const createChat = (text, sender, receiver) => {
-  return new Promise((resolve) => {
-    setTimeout(async () => {
-      let chats = allChats();
-      let data = {
-        text,
-        sender_id: sender.id,
-        receiver_id: receiver.id,
-        sender_name: sender.name,
-        receiver_name: receiver.name,
-        id: chats.length + 1,
-      };
+export const createChat = async (text, sender, receiver) => {
+  // return new Promise((resolve) => {
+  //   setTimeout(async () => {
+  //     let chats = allChats();
+  //     let data = {
+  //       text,
+  //       sender_id: sender.id,
+  //       receiver_id: receiver.id,
+  //       sender_name: sender.name,
+  //       receiver_name: receiver.name,
+  //       id: chats.length + 1,
+  //     };
 
-      chats.push(data);
-      localStorage.setItem("chats", JSON.stringify(chats));
+  //     chats.push(data);
+  //     localStorage.setItem("chats", JSON.stringify(chats));
 
-      resolve(data);
-    }, 1000);
-  });
+  //     resolve(data);
+  //   }, 1000);
+  // });
+  let data = {
+    text,
+    sender_id: sender.id,
+    receiver_id: receiver.id,
+    sender_name: sender.name,
+    receiver_name: receiver.name
+  };
+  const docRef = await addDoc(collection(db, "chats"), data);
+  return docRef.id
 };
