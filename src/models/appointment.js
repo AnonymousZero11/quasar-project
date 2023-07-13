@@ -53,7 +53,7 @@ const model = [
       mapOptions: true,
       options: [
         { label: "Online", value: "T" },
-        { label: "Face to Face", value: "F" },
+        { label: "Face to Face", value: "R" },
       ],
     },
     col: 12,
