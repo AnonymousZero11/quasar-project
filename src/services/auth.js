@@ -5,6 +5,21 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "boot/firebaseConnection";
+import { api } from "boot/axios";
+
+export const checkHospitalUser = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user) {
+    api.get('/api/users/' + user.uid).then((res) => {
+      localStorage.setItem("hospital", JSON.stringify(true));
+    }).catch((err) => {
+      localStorage.setItem("hospital", JSON.stringify(false));
+    })
+  } else {
+    localStorage.setItem("hospital", JSON.stringify(false));
+  }
+}
 
 export const getUser = () => {
   return auth.currentUser;
